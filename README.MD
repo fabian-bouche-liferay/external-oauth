@@ -7,6 +7,8 @@ Keycloak creates access tokens in the JWT format (https://tools.ietf.org/html/dr
 This format makes it possible for the Resource server to validate access tokens autonomously thanks to the exposition of
 a JWKS URL displaying the authorization server's certificates.
 
+![Architecture](./doc/architecture.png)
+
 Another possibility would be to rely on token introspection (https://tools.ietf.org/html/rfc7662).
 We could write a similar AuthVerifier implementing this policy.
 
