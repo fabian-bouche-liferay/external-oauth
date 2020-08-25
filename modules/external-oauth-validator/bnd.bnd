@@ -1,0 +1,45 @@
+Bundle-Name: external-oauth-provider
+Bundle-SymbolicName: com.liferay.samples.fbo.external.oauth.provider
+Bundle-Version: 1.0.0
+
+Bundle-ClassPath:\
+	.,\
+	lib/nimbus-jose-jwt.jar,\
+	lib/json-smart.jar,\
+	lib/accessors-smart.jar,\
+	lib/asm.jar,\
+	lib/json-path.jar,\
+	lib/gson.jar,\
+	lib/httpcore.jar,\
+	lib/httpclient.jar
+  
+-includeresource:\
+	lib/nimbus-jose-jwt.jar=nimbus-jose-jwt-8.3.jar,\
+	lib/json-smart.jar=json-smart-2.3.jar,\
+	lib/accessors-smart.jar=accessors-smart-1.2.jar,\
+	lib/asm.jar=asm-5.0.4.jar,\
+	lib/json-path.jar=json-path-2.4.0.jar,\
+	lib/gson.jar=gson-2.2.4.jar,\
+	lib/httpcore.jar=httpcore-4.4.9.jar,\
+	lib/httpclient.jar=httpclient-4.5.5.jar
+	
+Import-Package:\
+	com.google.crypto.tink.*;resolution:="optional",\
+	net.jcip.annotations.*;resolution:="optional",\
+	org.apache.tapestry5.*;resolution:="optional",\
+	org.bouncycastle.asn1.*;resolution:="optional",\
+	org.bouncycastle.cert.*;resolution:="optional",\
+	org.bouncycastle.crypto.*;resolution:="optional",\
+	org.bouncycastle.jce.provider.*;resolution:="optional",\
+	org.bouncycastle.*;resolution:="optional",\
+	org.codehaus.jettison.*;resolution:="optional",\
+	*
+
+Export-Package:\
+	com.liferay.samples.fbo.oauth.validator.configuration,\
+	com.liferay.samples.fbo.oauth.validator.constants
+	
+-metatype: *
+-plugin.metatype: com.liferay.ant.bnd.metatype.MetatypePlugin
+-plugin.bundle: com.liferay.ant.bnd.resource.bundle.ResourceBundleLoaderAnalyzerPlugin
+-sources: true
