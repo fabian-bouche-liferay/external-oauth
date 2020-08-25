@@ -41,6 +41,8 @@ import com.nimbusds.jwt.JWTClaimsSet;
 		)
 public class ExternalScopeChecker implements ScopeChecker, ScopeContext {
 
+	private static final String GET = "GET";
+
 	@Override
 	public void clear() {
 
@@ -72,10 +74,18 @@ public class ExternalScopeChecker implements ScopeChecker, ScopeContext {
 	}
 
 	@Override
-	public boolean checkScope(String requestedScope) {
+	public boolean checkScope(String method) {
 
-		LOG.debug("Check scope: " + requestedScope);
+		LOG.debug("Method: " + method);
 		LOG.debug("Application name: " + _applicationNameThreadLocal.get());
+		
+		String requestedScopeMethod;
+		String requestedScope = _applicationNameThreadLocal.get() + ".everything";
+		if(GET .equals(method)) {
+			requestedScopeMethod = _applicationNameThreadLocal.get() + ".everything.read";
+		} else {
+			requestedScopeMethod = _applicationNameThreadLocal.get() + ".everything.write";
+		}
 
 		try {
 
@@ -93,7 +103,7 @@ public class ExternalScopeChecker implements ScopeChecker, ScopeContext {
 			LOG.debug("Token scopes: " + scopes);
 			List<String> scopesList = Arrays.asList(scopes.split(" "));
 			
-			return scopesList.contains(_applicationNameThreadLocal.get());
+			return scopesList.contains(requestedScope) || scopesList.contains(requestedScopeMethod);
 			
 		} catch (MalformedURLException e) {
 			LOG.error("Malformed URL exception", e);
